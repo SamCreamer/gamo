@@ -9,4 +9,6 @@ i) All movement controls (WASD and arrow keys)
 ii) Enemy generation
 iii) Some trigger when collision occurs
 
-There's no lives or levels or scoring implemented yet. Might continue this some day, not sure.
+There's no lives or levels or scoring implemented yet. Might continue this some day, not sure. 
+
+TO USE: Just download and open index.html in a browser
