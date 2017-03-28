@@ -2,40 +2,85 @@
 // october 2016, sam creamer
 
 // canvas setup
-var canvas 		= document.getElementById("gamoCanvas");
+var canvas 		= document.getElementById("gameCanvas");
 var ctx			= canvas.getContext("2d");
 canvas.height 	= window.innerHeight;
 canvas.width  	= window.innerWidth;
 
-// misc setup
-var rightPressed    = false;
-var leftPressed     = false;
-var upPressed       = false;
-var downPressed     = false;
-var desiredFPS      = 100;
-var frameRate       = 1000 / desiredFPS; // 100 fps, not currently being used
+var setup = function(mode) {
+	// I guess these will be global variables. obviously this is not the best way to do this, but for such a small game I think its okay
+	// misc setup
+	rightPressed    = false;
+	leftPressed     = false;
+	upPressed       = false;
+	downPressed     = false;
+	lastRun			= false;
+	fps 			= 0.0;
+	fpsShown 		= 0.0;
+	frameCounter    = 0;
 
-// game setup
-var gameOver	= false;
-var gamePaused 	= false;
-var score   	= 0;
-var level   	= 1;
+	// game setup
+	gameOver	= false;
+	gamePaused 	= false;
+	show_fps	= true;
+	score   	= 0;
 
-// ball character vars
-var ballRadius  = 10;
-var ballSpeed   = 5;
-var ballDx      = 0;
-var ballDy      = 0;
-var ballX       = canvas.width / 2;
-var ballY       = canvas.height / 2;
+	// ball character vars
+	ballRadius  = 10;
+	ballSpeed   = 5;
+	ballDx      = 0;
+	ballDy      = 0;
+	ballX       = canvas.width / 2;
+	ballY       = canvas.height / 2;
+	console.log(mode);
+	switch (mode) {
+		case 'e':
+			enemyCreateRate = 30;
+			break;
+		case 'm':
+			enemyCreateRate = 15;
+			break;
+		case 'h':
+			enemyCreateRate = 8;
+			break;
+		case 'i':
+			enemyCreateRate = 1;
+			console.log(enemyCreateRate);
+			break;
+		default:
+			enemyCreateRate = 30;
+			break;
+	}
 
-// enemy character setup and array
-var enemyRadius     = 20;
-var enemySpeed      = 3;
-var enemyInitX      = 0;
-var enemyInitY      = 0;
-var enemyInitDx     = 0;
-var enemyInitDy     = 0;
-var enemyCreateRate = 50; // enemy created every (this) frames on average
-var enemyArray      = [];
-var enemyCounter    = 0; // will be used to time the game and score the game
+	// enemy character setup and array
+	enemyRadius     = 15;
+	enemySpeed      = 3;
+	enemyInitX      = 0;
+	enemyInitY      = 0;
+	enemyInitDx     = 0;
+	enemyInitDy     = 0;
+	// enemyCreateRate = 2; // enemy created every (this) frames on average
+	enemyArray      = [];
+	enemyCounter    = 0; // will be used to time the game and score the game
+
+}
+
+var newGame = function() {
+	setup('m');
+	document.getElementById('preGame').style.display = 'none';
+	document.getElementById('gameCanvas').style.display = 'block';
+	document.getElementById('gameOver').style.display = 'none';
+}
+
+//button listener for new game
+document.getElementById('restart-game-btn').addEventListener('click', function() {
+	newGame();
+	gameLoop();
+});
+
+document.getElementById('playBtn').addEventListener('click', function() {
+	newGame();
+	gameLoop();
+});
+
+

@@ -1,14 +1,26 @@
-# gamo
-First attempt at making a cool JavaScript game. The game is incomplete.
+GAMO
+By Sam Creamer
+March 2017
 
-The point of the game is to avoid the red circles (enemies). You are the blue circle.
+I have turned this initial skeleton into a somewhat working game. It is a very simple game, feel free to use this source for inspiration or to learn.
 
-Right now, the only things that have been implemented are the following: 
 
-i) All movement controls (WASD and arrow keys)
-ii) Enemy generation
-iii) Some trigger when collision occurs
+THE GAME
+----------
 
-There's no lives or levels or scoring implemented yet. Might continue this some day, not sure. 
+Just use arrow keys or WASD to avoid the red dots. The longer you survive, the more points you get
 
-TO USE: Just download and open index.html in a browser
+
+HOW TO INSTALL
+---------------
+
+Just clone and open index.html in any browser (or download the files and open index.html in any browser)
+
+TODO
+-----
+
+Add power ups / boosts
+
+
+
+
