@@ -1,5 +1,7 @@
 GAMO
+
 By Sam Creamer
+
 March 2017
 
 I have turned this initial skeleton into a somewhat working game. It is a very simple game, feel free to use this source for inspiration or to learn.
