@@ -32,7 +32,7 @@ var setup = function(mode) {
 	ballDy      = 0;
 	ballX       = canvas.width / 2;
 	ballY       = canvas.height / 2;
-	console.log(mode);
+
 	switch (mode) {
 		case 'e':
 			enemyCreateRate = 30;
@@ -45,7 +45,6 @@ var setup = function(mode) {
 			break;
 		case 'i':
 			enemyCreateRate = 1;
-			console.log(enemyCreateRate);
 			break;
 		default:
 			enemyCreateRate = 30;

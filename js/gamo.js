@@ -31,6 +31,7 @@ function gameLoop() {
         window.requestAnimationFrame(gameLoop);
     } else {
         // game over
+        document.addEventListener("keydown", newGameKeyDownHandler, false);
         document.getElementById('finalScore').innerHTML = score;
         document.getElementById('gameCanvas').style.display = "none";
         document.getElementById('gameOver').style.display = "block";
@@ -92,7 +93,6 @@ function createEnemy() {
         enemyCounter++;
         // eventually make enemies harder
         if (enemyCounter % 35 == 0 && enemyCounter > 0) {
-            console.log("level up");
             enemyRadius = enemyRadius < 40 ? enemyRadius + 5 : enemyRadius; 
             enemySpeed  = enemySpeed < 15 ? enemySpeed + 2 : enemySpeed;
         }
@@ -111,7 +111,6 @@ function drawAndUpdateEnemies() { // we do the enemies in one function so we onl
         ctx.closePath();
         //detech collision
         if (detectCircleCollision(e.x, e.y, e.radius, ballX, ballY, ballRadius)) {
-            console.log("HIT");
             gameOver = true;
         }
         // update
@@ -121,8 +120,6 @@ function drawAndUpdateEnemies() { // we do the enemies in one function so we onl
         // check if its been alive for 100 frames. this just makes sure that it has been shown on the screen
         if (e.frames > 100 && (e.x < -enemyRadius * 2 || e.x > canvas.width + (enemyRadius * 2) || e.y < -enemyRadius * 2 || e.y > canvas.height + (enemyRadius * 2))) { // enemy is done
             enemyArray.splice(i, 1);
-            // give some score
-            console.log(e.frames);
             score += enemyRadius * enemySpeed;
         }
     }
@@ -193,6 +190,15 @@ function keyUpHandler(e) {
     } else if (e.keyCode == 83 || e.keyCode == 40) {
         downPressed = false;
     }
+}
+
+function newGameKeyDownHandler(e) {
+    document.removeEventListener('keydown', newGameKeyDownHandler, false);
+    if (e.keyCode == 13 || e.keyCode == 32) {
+        newGame();
+        gameLoop();
+    }
+    
 }
 
 // misc methods
