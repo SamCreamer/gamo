@@ -57,31 +57,31 @@ function createEnemy() {
     switch (spawnRoll) {
         case 0: // spawn on the top wall
             enemyInitX   = getRandomInt(0, canvas.width);
-            enemyInitY   = -40;
+            enemyInitY   = -100;
             enemyInitDx  = getRandomInt(0, 11) - 5;
             enemyInitDy  = enemySpeed; // get random int between -5 and 5
             break;
         case 1: // right
-            enemyInitX   = canvas.width + 40;
+            enemyInitX   = canvas.width + 100;
             enemyInitY   = getRandomInt(0, canvas.height);
             enemyInitDx  = enemySpeed;
             enemyInitDy  = getRandomInt(0, (enemySpeed * 2) + 1) - enemySpeed; // get random int between -5 and 5
             break;
         case 2: // bottom
             enemyInitX   = getRandomInt(0, canvas.width);
-            enemyInitY   = canvas.height + 40;
+            enemyInitY   = canvas.height + 100;
             enemyInitDx  = getRandomInt(0, (enemySpeed * 2) + 1) - enemySpeed;
             enemyInitDy  = -enemySpeed; // get random int between -5 and 5
             break;
         case 3: // left
-            enemyInitX   = -40;
+            enemyInitX   = -100;
             enemyInitY   = getRandomInt(0, canvas.height);
             enemyInitDx  = enemySpeed;
             enemyInitDy  = getRandomInt(0, (enemySpeed * 2) + 1) - enemySpeed; // get random int between -5 and 5
             break;
         default: // default will spawn on left wall
             console.log("something went wrong with createEnemies()");
-            enemyInitX   = -40;
+            enemyInitX   = -100;
             enemyInitY   = getRandomInt(0, canvas.height);
             enemyInitDx  = enemySpeed;
             enemyInitDy  = getRandomInt(0, (enemySpeed * 2) + 1) - enemySpeed; // get random int between -5 and 5
@@ -93,7 +93,7 @@ function createEnemy() {
         enemyCounter++;
         // eventually make enemies harder
         if (enemyCounter % 35 == 0 && enemyCounter > 0) {
-            enemyRadius = enemyRadius < 40 ? enemyRadius + 5 : enemyRadius; 
+            enemyRadius = enemyRadius < 40 ? enemyRadius + 5 : enemyRadius;
             enemySpeed  = enemySpeed < 15 ? enemySpeed + 2 : enemySpeed;
         }
 }
@@ -104,11 +104,7 @@ function drawAndUpdateEnemies() { // we do the enemies in one function so we onl
     for (i = 0; i < enemyArray.length; i++) {
         e = enemyArray[i];
         // draw
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.radius, 0, Math.PI*2);
-        ctx.fillStyle = "#f00";
-        ctx.fill();
-        ctx.closePath();
+				ctx.drawImage(enemySprite, e.x, e.y);
         //detech collision
         if (detectCircleCollision(e.x, e.y, e.radius, ballX, ballY, ballRadius)) {
             gameOver = true;
@@ -127,11 +123,7 @@ function drawAndUpdateEnemies() { // we do the enemies in one function so we onl
 
 // player methods
 function drawBall() {
-	ctx.beginPath();
-    ctx.arc(ballX, ballY, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#445566";
-    ctx.fill();
-    ctx.closePath();
+		ctx.drawImage(playerSprite, ballX, ballY);
 }
 
 function updateBall() {
@@ -198,7 +190,7 @@ function newGameKeyDownHandler(e) {
         newGame();
         gameLoop();
     }
-    
+
 }
 
 // misc methods

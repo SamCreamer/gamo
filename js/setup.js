@@ -7,6 +7,14 @@ var ctx			= canvas.getContext("2d");
 canvas.height 	= window.innerHeight;
 canvas.width  	= window.innerWidth;
 
+const playerSprite = new Image();
+playerSprite.src = 'assets/sprites/player.png';
+
+const enemySprite = new Image();
+enemySprite.src = 'assets/sprites/duck_yellow.png';
+
+console.log(playerSprite);
+
 var setup = function(mode) {
 	// I guess these will be global variables. obviously this is not the best way to do this, but for such a small game I think its okay
 	// misc setup
@@ -81,5 +89,3 @@ document.getElementById('playBtn').addEventListener('click', function() {
 	newGame();
 	gameLoop();
 });
-
-
